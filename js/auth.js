@@ -6,11 +6,13 @@ authForm.onsubmit = function (event) {
     firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function (error) {
       console.log('Falha no acesso')
       console.log(error)
+      hideItem(loading)
     })
   } else {
     firebase.auth().createUserWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function (error) {
       console.log('Falha no cadastro')
       console.log(error)
+      hideItem(loading)
     })
   }
 }
@@ -33,3 +35,16 @@ function signOut() {
   })
 }
 
+// Função que permite o usuário fazer a verificação do e-mail dele
+function sendEmailVerification() {
+  showItem(loading)
+  var user = firebase.auth().currentUser
+  user.sendEmailVerification().then(function () {
+    alert('E-mail de verificação foi enviado para ' + user.email + '! Verifique a sua caixa de entrada')
+  }).catch(function (error) {
+    alert('Houve um erro ao enviar o e-mail de verificação')
+    console.log(error)
+  }).finally(function () {
+    hideItem(loading)
+  })
+}
