@@ -16,6 +16,9 @@ var emailVerified = document.getElementById('emailVerified')
 
 var passwordReset = document.getElementById('passwordReset')
 
+var userName = document.getElementById('userName')
+var userImg = document.getElementById('userImg')
+
 
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
@@ -55,6 +58,8 @@ function showUserContent(user) {
     emailVerified.innerHTML = 'E-mail não verificado'
     showItem(sendEmailVerificationDiv)
   }
+  userImg.src = user.photoURL ? user.photoURL : './img/unknownUser.png'
+  userName.innerHTML = user.displayName
   userEmail.innerHTML = user.email
   hideItem(auth)
   showItem(userContent)
@@ -68,7 +73,7 @@ function showAuth() {
   showItem(auth)
 }
 
-//Atributos extras de configuração de e-mail
-let actionCodeSettings ={
-  url:'http://127.0.0.1:5500/'
+// Atributos extras de configuração de e-mail
+var actionCodeSettings = {
+  url: 'http://127.0.0.1:5500/'
 }

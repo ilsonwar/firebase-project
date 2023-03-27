@@ -52,11 +52,19 @@
         Já possui uma conta?
         <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
       </p>
+
+      <p>
+        Ou acesse usando:<br>
+        <img src="img/google.png" alt="Logotipo do Google" onclick="signInWithGoogle()">
+      </p>
     </div>
-    <!-- Conteúdo destinado para usuários autenticados -->
+
+    <!--Conteúdo destinado para usuários autenticados-->
     <div id="userContent" class="startHidden">
       <hr>
       <div id="userInfo" class="center">
+        <img id="userImg">
+        <p id="userName"></p>
         <p id="userEmail"></p>
         <p id="emailVerified"></p>
         <div id="sendEmailVerificationDiv">
@@ -65,6 +73,7 @@
         <button class="alternative" onclick="signOut()">Sair</button>
       </div>
     </div>
+  </div>
 
 
   </div>

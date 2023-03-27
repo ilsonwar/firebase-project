@@ -1,5 +1,7 @@
-//Traduz para português a autenticação do firebase
-firebase.auth().languageCode = 'pt-br'
+
+// Traduz para português brasileiro a autenticação do Firebase
+firebase.auth().languageCode = 'pt-BR'
+
 // Função que trata a submissão do formulário de autenticação
 authForm.onsubmit = function (event) {
   showItem(loading)
@@ -69,4 +71,12 @@ function sendPasswordResetEmail() {
   }
 }
 
-
+// Função que permite a autenticação pelo Google
+function signInWithGoogle() {
+  showItem(loading)
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (error) {
+    alert('Houve um erro ao autenticar usando o Google')
+    console.log(error)
+    hideItem(loading)
+  })
+}
