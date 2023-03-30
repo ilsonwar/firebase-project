@@ -151,7 +151,7 @@ function updateUserName() {
         displayName: newUserName,
       })
       .catch(function (error) {
-        alert("Houve um erro aoatualizar o nome de usuário");
+        alert("Houve um erro ao atualizar o nome de usuário");
         console.log(error);
       })
       .finally(function () {
@@ -159,5 +159,25 @@ function updateUserName() {
       });
   } else {
     alert("Nome de usuário não póde ser vazio");
+  }
+}
+
+// Função que permite remover contas de usuário
+function deleteUserAccount() {
+  let confirmation = confirm("Você realmente deseja excluir sua conta?");
+  if (confirmation) {
+    showItem(loading)
+    firebase
+      .auth()
+      .currentUser.delete()
+      .then(function () {
+        alert("Sua conta foi removida com sucesso!");
+      })
+      .catch(function (error) {
+        alert("Houve um erro remover sua conta, relogue e tente novamente");
+        console.log(error);
+      }).finally(function () {
+        hideItem(loading);
+      })
   }
 }
