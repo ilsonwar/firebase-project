@@ -60,14 +60,14 @@ p {
   background-color: #44c;
 }
 
-#loading{
+#loading {
   position: absolute;
-  top:calc(50% - 100px);
-  left:calc(50% - 100px); 
+  top: calc(50% - 100px);
+  left: calc(50% - 100px);
   z-index: 1;
 }
 
-#auth img{
+#auth img {
   cursor: pointer;
 }
 
@@ -75,7 +75,7 @@ p {
   opacity: 0.75;
 }
 
-#userImg{
+#userImg {
   height: 40px;
   border-radius: 100%;
 }
