@@ -22,6 +22,8 @@ let userName = document.getElementById("userName");
 let userImg = document.getElementById("userImg");
 
 let todoForm = document.getElementById("todoForm");
+let todoCount = document.getElementById("todoCount");
+let ulTodoList = document.getElementById("ulTodoList");
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -71,6 +73,11 @@ function showUserContent(user) {
   userName.innerHTML = user.displayName;
   userEmail.innerHTML = user.email;
   hideItem(auth);
+
+  dbRefUsers.child(firebase.auth().currentUser.uid).on('value', function(dataSnapshot){
+    fillTodoList(dataSnapshot)
+  })
+
   showItem(userContent);
 }
 
@@ -119,4 +126,4 @@ let actionCodeSettings = {
 };
 
 let database = firebase.database();
-let dbRef = firebase.database().ref("users");
+let dbRefUsers = firebase.database().ref("users");
