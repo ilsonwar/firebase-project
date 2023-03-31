@@ -21,6 +21,7 @@ var passwordReset = document.getElementById("passwordReset");
 var userName = document.getElementById("userName");
 var userImg = document.getElementById("userImg");
 
+var todoForm = document.getElementById('todoForm')
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -104,5 +105,8 @@ function showError(prefix, error) {
 
 // Atributos extras de configuração de e-mail
 var actionCodeSettings = {
-  url: "http://127.0.0.1:5500/",
+  url: "https://todolist-52f95.firebaseapp.com/",
 };
+
+var database = firebase.database()
+var dbRef = firebase.database().ref('users')
