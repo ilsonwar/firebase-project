@@ -48,7 +48,7 @@ function signOut() {
 // Função que permite o usuário fazer a verificação do e-mail dele
 function sendEmailVerification() {
   showItem(loading);
-  var user = firebase.auth().currentUser;
+  let user = firebase.auth().currentUser;
   user
     .sendEmailVerification(actionCodeSettings)
     .then(function () {
@@ -68,7 +68,7 @@ function sendEmailVerification() {
 
 // Função que permite o usuário redefinir a senha dele
 function sendPasswordResetEmail() {
-  var email = prompt(
+  let email = prompt(
     "Redefinir senha! Informe o seu endereço de e-mail.",
     authForm.email.value
   );
@@ -126,7 +126,7 @@ function signInWithFacebook() {
 
 // Função que permite atualizar nomes de usuários
 function updateUserName() {
-  var newUserName = prompt(
+  let newUserName = prompt(
     "Informe um novo nome de usuário.",
     userName.innerHTML
   );
@@ -151,7 +151,7 @@ function updateUserName() {
 
 // Função que permite remover contas de usuário
 function deleteUserAccount() {
-  var confirmation = confirm("Realmente deseja excluir a sua conta?");
+  let confirmation = confirm("Realmente deseja excluir a sua conta?");
   if (confirmation) {
     showItem(loading);
     firebase

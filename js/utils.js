@@ -1,27 +1,27 @@
 // Defindo referências para elementos da página
-var authForm = document.getElementById("authForm");
-var authFormTitle = document.getElementById("authFormTitle");
-var register = document.getElementById("register");
-var access = document.getElementById("access");
+let authForm = document.getElementById("authForm");
+let authFormTitle = document.getElementById("authFormTitle");
+let register = document.getElementById("register");
+let access = document.getElementById("access");
 
-var loading = document.getElementById("loading");
+let loading = document.getElementById("loading");
 
-var auth = document.getElementById("auth");
-var userContent = document.getElementById("userContent");
+let auth = document.getElementById("auth");
+let userContent = document.getElementById("userContent");
 
-var userEmail = document.getElementById("userEmail");
+let userEmail = document.getElementById("userEmail");
 
-var sendEmailVerificationDiv = document.getElementById(
+let sendEmailVerificationDiv = document.getElementById(
   "sendEmailVerificationDiv"
 );
-var emailVerified = document.getElementById("emailVerified");
+let emailVerified = document.getElementById("emailVerified");
 
-var passwordReset = document.getElementById("passwordReset");
+let passwordReset = document.getElementById("passwordReset");
 
-var userName = document.getElementById("userName");
-var userImg = document.getElementById("userImg");
+let userName = document.getElementById("userName");
+let userImg = document.getElementById("userImg");
 
-var todoForm = document.getElementById('todoForm')
+let todoForm = document.getElementById("todoForm");
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -84,29 +84,39 @@ function showAuth() {
 
 //centralizar e traduzir erros
 function showError(prefix, error) {
-  console.log(error.code)
-  hideItem(loading)
+  console.log(error.code);
+  hideItem(loading);
 
   switch (error.code) {
-    case 'auth/invalid-email': alert(prefix + ' ' + 'E-mail inválido!')
-    break;
-    case 'auth/wrong-password': alert(prefix + ' ' + 'Senha inválida!')
-    break;
-    case 'auth/weak-password': alert(prefix + ' ' + 'Senha deve ter ao menos 6 caracteres!')
-    break;
-    case 'auth/email-already-in-use': alert(prefix + ' ' + 'E-mail já está em uso por outra conta!')
-    break;
-    case 'auth/popup-closed-by-user': alert(prefix + ' ' + 'O popup de autenticação foi fechado antes da operação ser concluída!')
-    break;   
-  
-    default: alert(prefix + ' ' + error.message)
+    case "auth/invalid-email":
+      alert(prefix + " " + "E-mail inválido!");
+      break;
+    case "auth/wrong-password":
+      alert(prefix + " " + "Senha inválida!");
+      break;
+    case "auth/weak-password":
+      alert(prefix + " " + "Senha deve ter ao menos 6 caracteres!");
+      break;
+    case "auth/email-already-in-use":
+      alert(prefix + " " + "E-mail já está em uso por outra conta!");
+      break;
+    case "auth/popup-closed-by-user":
+      alert(
+        prefix +
+          " " +
+          "O popup de autenticação foi fechado antes da operação ser concluída!"
+      );
+      break;
+
+    default:
+      alert(prefix + " " + error.message);
   }
 }
 
 // Atributos extras de configuração de e-mail
-var actionCodeSettings = {
+let actionCodeSettings = {
   url: "https://todolist-52f95.firebaseapp.com/",
 };
 
-var database = firebase.database()
-var dbRef = firebase.database().ref('users')
+let database = firebase.database();
+let dbRef = firebase.database().ref("users");
