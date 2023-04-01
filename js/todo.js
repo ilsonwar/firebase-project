@@ -13,7 +13,7 @@ todoForm.onsubmit = function (event) {
         console.log('Tarefa "' + data.name + '" adicionada com sucesso');
       })
       .catch(function () {
-        showError("Falha ao adicionar tarefa", error);
+        showError("Falha ao adicionar tarefa. (use no máximo 30 caracteres):", error);
       });
     todoForm.name.value = "";
   } else {
@@ -92,7 +92,7 @@ function updateTodo(key) {
         console.log("Tarefa '" + data.name + "'atualizada com sucesso");
       })
       .catch(function (error) {
-        showError("Falha ao atualizar tarefa", error);
+        showError("Falha ao atualizar tarefa. (use no máximo 30 caracteres):", error);
       });
   } else {
     alert("O nome da tarefa não pode estar em branco ao atualizar");
