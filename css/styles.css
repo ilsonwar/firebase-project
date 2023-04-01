@@ -83,3 +83,26 @@ p {
   height: 40px;
   border-radius: 100%;
 }
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+li{
+  padding: 6px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li:hover{
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.todoBtn{
+  margin: 0 0 0 4px;
+}
