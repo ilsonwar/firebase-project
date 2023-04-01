@@ -92,7 +92,8 @@ ul{
 li{
   padding: 6px;
   border-bottom: 1px solid #ddd;
-  display: flex;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
   justify-content: space-between;
   align-items: center;
 }
@@ -105,4 +106,5 @@ li:hover{
 
 .todoBtn{
   margin: 0 0 0 4px;
+
 }
