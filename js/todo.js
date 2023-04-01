@@ -4,6 +4,7 @@ todoForm.onsubmit = function (event) {
   if (todoForm.name.value != "") {
     let data = {
       name: todoForm.name.value,
+      nameLowerCase: todoForm.name.value.toLowerCase()
     };
 
     dbRefUsers
@@ -81,13 +82,12 @@ function updateTodo(key) {
   if (newValue && newValue != "") {
     let data = {
       name: newValue,
+      nameLowerCase: newValue.toLowerCase()
     };
     dbRefUsers
       .child(firebase.auth().currentUser.uid)
       .child(key)
-      .update({
-        name: newValue,
-      })
+      .update(data)
       .then(function () {
         console.log("Tarefa '" + data.name + "'atualizada com sucesso");
       })

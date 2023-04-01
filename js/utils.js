@@ -24,6 +24,10 @@ let userImg = document.getElementById("userImg");
 let todoForm = document.getElementById("todoForm");
 let todoCount = document.getElementById("todoCount");
 let ulTodoList = document.getElementById("ulTodoList");
+
+let search = document.getElementById("search");
+
+
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -74,11 +78,28 @@ function showUserContent(user) {
   userEmail.innerHTML = user.email;
   hideItem(auth);
 
+  getDefaultTodoList()
+  search.onkeyup = function(){
+    if(search.value !=''){
+      let searchText = search.value.toLowerCase()
+      dbRefUsers.child(user.uid)
+      .orderByChild('nameLowerCase')//ordena as tarefas com base pelo nome
+      .startAt(searchText).endAt(searchText + '\uf8ff')//delimita resultados pelo oque digitou
+      .once('value').then(function(dataSnapshot){      //busca tarefas filtradas somente uma vez
+        fillTodoList(dataSnapshot)
+      })
+    }else{
+      getDefaultTodoList()
+    }
+  }
+  showItem(userContent);
+}
+
+//buscar tarefas em tempo real(listagem padrão)
+function getDefaultTodoList() {
   dbRefUsers.child(firebase.auth().currentUser.uid).on('value', function(dataSnapshot){
     fillTodoList(dataSnapshot)
   })
-
-  showItem(userContent);
 }
 
 // Mostrar conteúdo para usuários não autenticados
