@@ -1,10 +1,30 @@
 // Trata a submissão do formulário de autenticação
 todoForm.onsubmit = function (event) {
   event.preventDefault(); // Evita o redirecionamento da página
+
   if (todoForm.name.value != "") {
+    let file = todoForm.file.files[0]; // Seleciona o primeiro aquivo da seleção de aquivos
+    if (file != null) {
+      // Verifica se o arquivo foi selecionado
+      if (file.type.includes("image")) {
+        // Verifica se o arquivo é uma imagem
+        // Compõe o nome do arquivo
+        let imgName = firebase.database().ref().push().key + "-" + file.name;
+        // Compõe o caminho do arquivo
+        let imgPath =
+          "todoListFiles /" + firebase.auth().currentUser.uid + "/" + imgName;
+
+        // Cria uma referência de arquivo usando o caminho criado na linha acima
+        let storageRef = firebase.storage().ref(imgPath);
+
+        // Inicia o processo de upload
+        storageRef.put(file);
+      }
+    }
+
     let data = {
       name: todoForm.name.value,
-      nameLowerCase: todoForm.name.value.toLowerCase()
+      nameLowerCase: todoForm.name.value.toLowerCase(),
     };
 
     dbRefUsers
@@ -14,7 +34,10 @@ todoForm.onsubmit = function (event) {
         console.log('Tarefa "' + data.name + '" adicionada com sucesso');
       })
       .catch(function () {
-        showError("Falha ao adicionar tarefa. (use no máximo 30 caracteres):", error);
+        showError(
+          "Falha ao adicionar tarefa. (use no máximo 30 caracteres):",
+          error
+        );
       });
     todoForm.name.value = "";
   } else {
@@ -82,7 +105,7 @@ function updateTodo(key) {
   if (newValue && newValue != "") {
     let data = {
       name: newValue,
-      nameLowerCase: newValue.toLowerCase()
+      nameLowerCase: newValue.toLowerCase(),
     };
     dbRefUsers
       .child(firebase.auth().currentUser.uid)
@@ -92,7 +115,10 @@ function updateTodo(key) {
         console.log("Tarefa '" + data.name + "'atualizada com sucesso");
       })
       .catch(function (error) {
-        showError("Falha ao atualizar tarefa. (use no máximo 30 caracteres):", error);
+        showError(
+          "Falha ao atualizar tarefa. (use no máximo 30 caracteres):",
+          error
+        );
       });
   } else {
     alert("O nome da tarefa não pode estar em branco ao atualizar");
