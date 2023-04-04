@@ -57,21 +57,45 @@ function trackUpload(upload) {
     function (snapshot) {
       // Segundo argumento: Recebe informações sobre o upload
       console.log(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100 + "%"
+        ((snapshot.bytesTransferred / snapshot.totalBytes) * 100).toFixed(2) +
+          "%"
       );
       progress.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     },
     function (error) {
       // Terceiro argumento: Função executada em caso de erro no upload
-      showError(error, "Falha no upload da imagem");
+      showError("Falha no upload da imagem", error);
+      hideItem(progressFeedback)
     },
     function () {
       // Quarto argumento: Função executada em caso de sucesso no upload
       console.log("Sucesso no upload");
+      hideItem(progressFeedback)
     }
   );
+
+  let playPauseUpload = true; //Estado de controledo upload
+  playPauseBtn.onclick = () => {
+    //Botão de pausar e continuar foi clicado
+    playPauseUpload = !playPauseUpload; //Inverte estado de controle do upload
+    if (playPauseUpload) {
+      upload.resume();
+      playPauseBtn.innerHTML = "Pausar";
+      console.log("upload retomado");
+    } else {
+      upload.pause();
+      playPauseBtn.innerHTML = "Continuar";
+      console.log("upload pausado");
+    }
+  };
+
+  cancelBtn.onclick = () => {
+    //Botão de cancelar upload foi clicado
+    upload.cancel();
+    alert("Upload cancelado pelo usuário");
+    hideItem(progressFeedback)
+  };
 }
-hideItem(progressFeedback);
 
 // Exibe a lista de tartefas do usuário
 function fillTodoList(dataSnapshot) {

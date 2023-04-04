@@ -30,6 +30,10 @@ let search = document.getElementById("search");
 let progressFeedback = document.getElementById("progressFeedback");
 let progress = document.getElementById("progress");
 
+let playPauseBtn = document.getElementById("playPauseBtn");
+var cancelBtn = document.getElementById('cancelBtn')
+
+
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
