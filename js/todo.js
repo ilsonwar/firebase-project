@@ -12,13 +12,17 @@ todoForm.onsubmit = function (event) {
         let imgName = firebase.database().ref().push().key + "-" + file.name;
         // Compõe o caminho do arquivo
         let imgPath =
-          "todoListFiles /" + firebase.auth().currentUser.uid + "/" + imgName;
+          "todoListFiles/" + firebase.auth().currentUser.uid + "/" + imgName;
 
         // Cria uma referência de arquivo usando o caminho criado na linha acima
         let storageRef = firebase.storage().ref(imgPath);
 
         // Inicia o processo de upload
-        storageRef.put(file);
+        let = upload = storageRef.put(file);
+
+        trackUpload(upload);
+      } else {
+        alert("O arquivo selecionado não é uma imagem");
       }
     }
 
@@ -44,6 +48,30 @@ todoForm.onsubmit = function (event) {
     alert("O nome da tarefa não pode ser em branco para criar a tarefa!");
   }
 };
+
+// Rastreia o progresso de upload
+function trackUpload(upload) {
+  showItem(progressFeedback);
+  upload.on(
+    "state_changed",
+    function (snapshot) {
+      // Segundo argumento: Recebe informações sobre o upload
+      console.log(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100 + "%"
+      );
+      progress.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    },
+    function (error) {
+      // Terceiro argumento: Função executada em caso de erro no upload
+      showError(error, "Falha no upload da imagem");
+    },
+    function () {
+      // Quarto argumento: Função executada em caso de sucesso no upload
+      console.log("Sucesso no upload");
+    }
+  );
+}
+hideItem(progressFeedback);
 
 // Exibe a lista de tartefas do usuário
 function fillTodoList(dataSnapshot) {
